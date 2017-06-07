@@ -560,7 +560,7 @@ static bool realpath_fd(int fd, std::string* realpath) {
   std::vector<char> buf(PATH_MAX), proc_self_fd(PATH_MAX);
   __libc_format_buffer(&proc_self_fd[0], proc_self_fd.size(), "/proc/self/fd/%d", fd);
   if (readlink(&proc_self_fd[0], &buf[0], buf.size()) == -1) {
-    PRINT("readlink(\"%s\") failed: %s [fd=%d]", &proc_self_fd[0], strerror(errno), fd);
+//    PRINT("readlink(\"%s\") failed: %s [fd=%d]", &proc_self_fd[0], strerror(errno), fd);
     return false;
   }
 
@@ -1545,8 +1545,8 @@ static int open_library_in_zipfile(ZipArchiveCache* zip_archive_cache,
   if (realpath_fd(fd, realpath)) {
     *realpath += separator;
   } else {
-    PRINT("warning: unable to get realpath for the library \"%s\". Will use given path.",
-          normalized_path.c_str());
+//    PRINT("warning: unable to get realpath for the library \"%s\". Will use given path.",
+//          normalized_path.c_str());
     *realpath = normalized_path;
   }
 
